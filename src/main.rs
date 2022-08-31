@@ -7,6 +7,8 @@ fn main() -> io::Result<()> {
 
     io::stdin().read_line(&mut json_buffer)?;
 
+    json_buffer = json_buffer.replace("\\", "");
+
     let obj: Value = serde_json::from_str(&json_buffer.to_owned())?;
 
     println!("{}", serde_json::to_string_pretty(&obj).unwrap());
