@@ -1,4 +1,4 @@
-use serde_json::{self, json, Value};
+use serde_json::{self, Value};
 use std::io;
 
 fn pretty_print_value(value: &Value) {
@@ -17,12 +17,11 @@ fn log_key(key: &String, source: &Value) {
     match source.as_object() {
         None => return,
         Some(object) => object.iter().for_each(|i| {
+            let curr_key = i.0;
             let value = i.1;
 
-            if i.0 == key {
-                let key = i.0;
-
-                pretty_print_value_w_prefix(value, format!("{key} =>"));
+            if curr_key == key {
+                pretty_print_value_w_prefix(value, format!("{curr_key} =>"));
             }
 
             log_key(key, value);
@@ -39,8 +38,8 @@ fn main() -> io::Result<()> {
 
     let obj: Value = serde_json::from_str(&json_buffer.to_owned())?;
 
-    if let Some(searchedKey) = std::env::args().nth(1) {
-        log_key(&searchedKey, &obj);
+    if let Some(searched_key) = std::env::args().nth(1) {
+        log_key(&searched_key, &obj);
 
         return Ok(());
     }
