@@ -1,5 +1,6 @@
 use serde_json::{self, Value};
 use std::io;
+use unescape::unescape;
 
 fn pretty_print_value(value: &Value) {
     pretty_print_value_w_prefix(value, "".to_owned());
@@ -34,7 +35,7 @@ fn main() -> io::Result<()> {
 
     io::stdin().read_line(&mut json_buffer)?;
 
-    json_buffer = json_buffer.replace("\\", "");
+    json_buffer = unescape(&json_buffer).expect("JSON parsing failed at unescaping.");
 
     let obj: Value = serde_json::from_str(&json_buffer.to_owned())?;
 
