@@ -2,6 +2,14 @@
 name = "jsonp"
 version = "0.1.0"
 edition = "2021"
+authors = ["Lukas Sestic <lsestic@gmail.com>"]
+license = "MIT"
+description = "A tool to pretty print a json quickly."
+readme = "README.md"
+homepage = "https://github.com/drlukas6/jsonp"
+repository = "https://github.com/drlukas6/jsonp"
+keywords = ["cli", "search", "json"]
+categories = ["command-line-utilities"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
